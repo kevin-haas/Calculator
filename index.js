@@ -23,6 +23,10 @@ function operate(method, a, b) {
     }
 }
 
+function populate(x) {
+    document.querySelector('.display').textContent += x;
+}
+
 console.log(add(2, 2));
 console.log(subtract(2, 2));
 console.log(multiply(2, 2));
