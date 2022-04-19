@@ -31,8 +31,58 @@ function wipe() {
     document.querySelector('.display').textContent = '';
 }
 
-console.log(add(2, 2));
-console.log(subtract(2, 2));
-console.log(multiply(2, 2));
-console.log(divide(2, 2));
-console.log(operate('/', 2, 2));
+function eval() {
+    let expression = document.querySelector('.display').textContent;
+    if (expression.includes('*') && expression.includes('/')) {
+        if (expression.indexOf('*') < expression.indexOf('/')) {
+            let temp = beforeAndAfter('*')
+            let ans = operate('*', temp[0], temp[1]);
+            document.querySelector('.display').textContent = expression.slice(0, temp[2]) + ans + expression.slice(temp[3] + 1);
+            eval();
+        }
+        else {
+            let temp = beforeAndAfter('/')
+            let ans = operate('/', temp[0], temp[1]);
+            document.querySelector('.display').textContent = expression.slice(0, temp[2]) + ans + expression.slice(temp[3] + 1);
+            eval();
+        }
+    }
+    else if (expression.includes('*')) {
+        let temp = beforeAndAfter('*')
+        let ans = operate('*', temp[0], temp[1]);
+        document.querySelector('.display').textContent = expression.slice(0, temp[2]) + ans + expression.slice(temp[3] + 1);
+        eval();
+    }
+    else if (expression.includes('/')) {
+        let temp = beforeAndAfter('/')
+        let ans = operate('/', temp[0], temp[1]);
+        document.querySelector('.display').textContent = expression.slice(0, temp[2]) + ans + expression.slice(temp[3] + 1);
+        eval();
+    }
+    else if (expression.includes('+')) {
+        let temp = beforeAndAfter('+')
+        let ans = operate('+', temp[0], temp[1]);
+        document.querySelector('.display').textContent = expression.slice(0, temp[2]) + ans + expression.slice(temp[3] + 1);
+        eval();
+    }
+    else if (expression.includes('-')) {
+        let temp = beforeAndAfter('-')
+        let ans = operate('-', temp[0], temp[1]);
+        document.querySelector('.display').textContent = expression.slice(0, temp[2]) + ans + expression.slice(temp[3] + 1);
+        eval();
+    }
+}
+
+function beforeAndAfter (operator) {
+    let expression = document.querySelector('.display').textContent;
+    let b = expression.indexOf(operator);
+    let a = b;
+    while (!isNaN(expression[a - 1]) && expression[a - 1] != ' ') {
+        a--;
+    }
+    let c = b;
+    while (!isNaN(expression[c + 1])) {
+        c++;
+    }
+    return [Number(expression.slice(a, b)), Number(expression.slice(b + 1, c + 1)), a, c];
+}
