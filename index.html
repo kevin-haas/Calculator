@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <title>Calculator</title>
         <link rel="stylesheet" href="styles.css">
-        <script src="index.js"></script>
+        <script src="index.js" defer></script>
     </head>
     <body>
         <div class="display"></div>
@@ -29,7 +29,7 @@
         <div class="row">
             <button onClick="wipe()">clear</button>
             <button onClick="populate(0)">0</button>
-            <button>=</button>
+            <button onClick="eval()">=</button>
             <button onClick="populate('/')">/</button>
         </div>
     </body>
