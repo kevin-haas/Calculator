@@ -77,11 +77,11 @@ function beforeAndAfter (operator) {
     let expression = document.querySelector('.display').textContent;
     let b = expression.indexOf(operator);
     let a = b;
-    while (!isNaN(expression[a - 1]) && expression[a - 1] != ' ') {
+    while (!isNaN(expression[a - 1]) || expression[a - 1] == '.') {
         a--;
     }
     let c = b;
-    while (!isNaN(expression[c + 1])) {
+    while (!isNaN(expression[c + 1]) || expression[c + 1] == '.') {
         c++;
     }
     return [Number(expression.slice(a, b)), Number(expression.slice(b + 1, c + 1)), a, c];
