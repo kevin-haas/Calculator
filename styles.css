@@ -4,6 +4,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: lightgrey;
 }
 
 .case {
@@ -16,6 +17,7 @@ body {
     justify-content: space-between;
     align-content: center;
     padding: 50px;
+    background-color: black;
 }
 
 .display {
@@ -27,6 +29,7 @@ body {
     display: flex;
     align-items: center;
     padding: 0px 20px;
+    background-color: lightgreen;
 }
 
 .buttons {
@@ -41,4 +44,11 @@ body {
     display: flex;
     flex-direction: column;
     row-gap: 20px;
+}
+
+button {
+    background-color: lightgray;
+    border-radius: 6px;
+    min-height: 40px;
+    min-width: 60px;
 }
