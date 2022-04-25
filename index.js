@@ -22,19 +22,19 @@ function wipe() {
 }
 
 // evaluates the expression in the display one operation at a time according to order of operations
-function eval() {
+function solve() {
     let expression = document.querySelector('.display').textContent;
 
     if (expression.includes('--')) {
         expression = document.querySelector('.display').textContent.replace("--", "+", 1);
         document.querySelector('.display').textContent = expression;
-        eval();
+        solve();
     }
 
     else if (expression.includes('++')) {
         expression = document.querySelector('.display').textContent.replace("++", "+", 1);
         document.querySelector('.display').textContent = expression;
-        eval();
+        solve();
     }
 
     else if (expression.includes('*') && expression.includes('/')) {
@@ -42,33 +42,33 @@ function eval() {
             let temp = beforeAndAfter('*')
             let ans = operate('*', temp[0], temp[1]);
             document.querySelector('.display').textContent = expression.slice(0, temp[2]) + ans + expression.slice(temp[3] + 1);
-            eval();
+            solve();
         }
         else {
             let temp = beforeAndAfter('/')
             let ans = operate('/', temp[0], temp[1]);
             document.querySelector('.display').textContent = expression.slice(0, temp[2]) + ans + expression.slice(temp[3] + 1);
-            eval();
+            solve();
         }
     }
     else if (expression.includes('*')) {
         let temp = beforeAndAfter('*')
         let ans = operate('*', temp[0], temp[1]);
         document.querySelector('.display').textContent = expression.slice(0, temp[2]) + ans + expression.slice(temp[3] + 1);
-        eval();
+        solve();
     }
     else if (expression.includes('/')) {
         let temp = beforeAndAfter('/')
         let ans = operate('/', temp[0], temp[1]);
         document.querySelector('.display').textContent = expression.slice(0, temp[2]) + ans + expression.slice(temp[3] + 1);
-        eval();
+        solve();
     }
     else if (expression.includes('+')) {
         let temp = beforeAndAfter('+')
         if (expression[temp[2] - 1] == '-' && isNaN(expression[temp[2] - 2])) temp[0] = -temp[0];
         let ans = operate('+', temp[0], temp[1]);
         document.querySelector('.display').textContent = expression.slice(0, temp[2]) + ans + expression.slice(temp[3] + 1);
-        eval();
+        solve();
     }
     else if (expression.includes('-')) {
         if (isNaN(expression[expression.indexOf('-') - 1])) {
@@ -78,7 +78,7 @@ function eval() {
                     let temp = beforeAndAfter('-');
                     let ans = operate('-', - temp[0], temp[1]);
                     document.querySelector('.display').textContent = expression.slice(0, temp[2]) + ans + expression.slice(temp[3] + 1);
-                    eval();
+                    solve();
             }
             else {
                 document.querySelector('.display').textContent = '-' + document.querySelector('.display').textContent;
@@ -88,7 +88,7 @@ function eval() {
             let temp = beforeAndAfter('-');
             let ans = operate('-', temp[0], temp[1]);
             document.querySelector('.display').textContent = expression.slice(0, temp[2]) + ans + expression.slice(temp[3] + 1);
-            eval();
+            solve();
         }
     }
 }
