@@ -24,7 +24,14 @@ function wipe() {
 // evaluates the expression in the display one operation at a time according to order of operations
 function eval() {
     let expression = document.querySelector('.display').textContent;
-    if (expression.includes('*') && expression.includes('/')) {
+
+    if (expression.includes('--')) {
+        expression = document.querySelector('.display').textContent.replace("--", "+", 1);
+        document.querySelector('.display').textContent = expression;
+        eval();
+    }
+
+    else if (expression.includes('*') && expression.includes('/')) {
         if (expression.indexOf('*') < expression.indexOf('/')) {
             let temp = beforeAndAfter('*')
             let ans = operate('*', temp[0], temp[1]);
@@ -52,15 +59,31 @@ function eval() {
     }
     else if (expression.includes('+')) {
         let temp = beforeAndAfter('+')
+        if (expression[temp[2] - 1] == '-' && isNaN(expression[temp[2] - 2])) temp[0] = -temp[0];
         let ans = operate('+', temp[0], temp[1]);
         document.querySelector('.display').textContent = expression.slice(0, temp[2]) + ans + expression.slice(temp[3] + 1);
         eval();
     }
     else if (expression.includes('-')) {
-        let temp = beforeAndAfter('-')
-        let ans = operate('-', temp[0], temp[1]);
-        document.querySelector('.display').textContent = expression.slice(0, temp[2]) + ans + expression.slice(temp[3] + 1);
-        eval();
+        if (isNaN(expression[expression.indexOf('-') - 1])) {
+            expression = document.querySelector('.display').textContent.replace("-", "", 1);
+            document.querySelector('.display').textContent = expression;
+            if (expression.includes('-')) {
+                    let temp = beforeAndAfter('-');
+                    let ans = operate('-', - temp[0], temp[1]);
+                    document.querySelector('.display').textContent = expression.slice(0, temp[2]) + ans + expression.slice(temp[3] + 1);
+                    eval();
+            }
+            else {
+                document.querySelector('.display').textContent = '-' + document.querySelector('.display').textContent;
+            }
+        }
+        else {
+            let temp = beforeAndAfter('-');
+            let ans = operate('-', temp[0], temp[1]);
+            document.querySelector('.display').textContent = expression.slice(0, temp[2]) + ans + expression.slice(temp[3] + 1);
+            eval();
+        }
     }
 }
 
@@ -73,11 +96,12 @@ function beforeAndAfter (operator) {
         a--;
     }
     let c = b;
+    if (expression[c + 1] == '-') c++;
     while (!isNaN(expression[c + 1]) || expression[c + 1] == '.') {
         c++;
     }
     return [Number(expression.slice(a, b)), Number(expression.slice(b + 1, c + 1)), a, c];
-}
+}   
 
 function back() {
     let expression = document.querySelector('.display').textContent;
