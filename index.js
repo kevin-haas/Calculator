@@ -31,7 +31,7 @@ function eval() {
         eval();
     }
 
-    if (expression.includes('++')) {
+    else if (expression.includes('++')) {
         expression = document.querySelector('.display').textContent.replace("++", "+", 1);
         document.querySelector('.display').textContent = expression;
         eval();
