@@ -19,7 +19,13 @@ function operate(method, a, b) {
         case '+': return add(a, b);
         case '-': return subtract(a, b);
         case '*': return multiply(a, b);
-        case '/': return divide(a, b);
+        case '/': {
+            if (b == 0) {
+                wipe();
+                return 'Divide by Zero: Apocalyptic Event Started';
+            }
+            return divide(a, b);
+        }
     }
 }
 
