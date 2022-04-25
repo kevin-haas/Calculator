@@ -31,6 +31,12 @@ function eval() {
         eval();
     }
 
+    if (expression.includes('++')) {
+        expression = document.querySelector('.display').textContent.replace("++", "+", 1);
+        document.querySelector('.display').textContent = expression;
+        eval();
+    }
+
     else if (expression.includes('*') && expression.includes('/')) {
         if (expression.indexOf('*') < expression.indexOf('/')) {
             let temp = beforeAndAfter('*')
@@ -96,7 +102,7 @@ function beforeAndAfter (operator) {
         a--;
     }
     let c = b;
-    if (expression[c + 1] == '-') c++;
+    if (expression[c + 1] == '-' || expression[c + 1] == '+') c++;
     while (!isNaN(expression[c + 1]) || expression[c + 1] == '.') {
         c++;
     }
