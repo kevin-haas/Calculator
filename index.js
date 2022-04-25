@@ -1,30 +1,14 @@
-function add(a, b) {
-    return a + b;
-}
-
-function subtract(a, b) {
-    return a - b;
-}
-
-function multiply(a, b) {
-    return a * b;
-}
-
-function divide(a, b) {
-    return a / b;
-}
-
 function operate(method, a, b) {
     switch(method) {
-        case '+': return add(a, b);
-        case '-': return subtract(a, b);
-        case '*': return multiply(a, b);
+        case '+': return a + b;
+        case '-': return a - b;
+        case '*': return a * b;
         case '/': {
             if (b == 0) {
                 wipe();
                 return 'Divide by Zero: Apocalyptic Event Started';
             }
-            return divide(a, b);
+            return a / b;
         }
     }
 }
