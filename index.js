@@ -37,6 +37,7 @@ function wipe() {
     document.querySelector('.display').textContent = '';
 }
 
+// evaluates the expression in the display one operation at a time according to order of operations
 function eval() {
     let expression = document.querySelector('.display').textContent;
     if (expression.includes('*') && expression.includes('/')) {
@@ -79,6 +80,7 @@ function eval() {
     }
 }
 
+// returns the number before and after the operator as well as the index for the start and end of the single operator expression
 function beforeAndAfter (operator) {
     let expression = document.querySelector('.display').textContent;
     let b = expression.indexOf(operator);
