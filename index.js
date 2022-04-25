@@ -78,3 +78,8 @@ function beforeAndAfter (operator) {
     }
     return [Number(expression.slice(a, b)), Number(expression.slice(b + 1, c + 1)), a, c];
 }
+
+function back() {
+    let expression = document.querySelector('.display').textContent;
+    document.querySelector('.display').textContent = expression.slice(0, expression.length - 1);
+}
